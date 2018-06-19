@@ -3,6 +3,3 @@ node_modules/
 templateLogReg/
 package-lock.json
 yarn.lock
-app.js
-user.js
-router.js
