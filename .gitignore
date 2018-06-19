@@ -1,9 +1,8 @@
 node_modules/
-package-lock.json
 .idea/
 templateLogReg/
-models/
-routes/
-app.js
+package-lock.json
 yarn.lock
-middleware
+app.js
+user.js
+router.js
