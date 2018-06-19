@@ -1,0 +1,124 @@
+html, body{
+    margin: 0px;
+}
+
+body{
+    background-image: url("../img/chao01.jpeg"), url("../img/ceu01.jpeg");
+    background-position: left bottom;
+    background-attachment: fixed;
+    background-repeat: repeat-x;
+    background-color: #2586DB;
+    z-index: -1;
+}
+
+#madoka{
+    height: 100px;
+    width: auto;
+    bottom: 35px;
+    position: absolute;
+    display: block;
+}
+
+.modal{
+    display: table;
+    display: none;
+    position: fixed;
+    z-index: 3;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(71,78,93,0.8);
+    padding-top: 50px;
+    z-index: 4;
+}
+
+.modal-content{
+    padding: 2%;
+    background-color: #fefefe;
+    margin: 2% auto 15% auto;
+    border: 1px solid #888;
+    width: 25%;
+}
+
+.modal-content label{
+    display: table-row;
+}
+
+#widget-ceu-botao, #widget-chao-botao, #widget-galeria-botao, #widget-texto-botao{
+    display: none;
+}
+
+#galeria {
+  margin: 0 auto;
+}
+
+#galeria, #slide {
+  width: 400px;
+  height: 300px;
+  margin-top: 20px;
+}
+
+#slide {
+  border: 1px solid gray;
+}
+
+.controle {
+  width: 150px;
+  height: 45px;
+  padding: 6px 10px;
+  border: 1px solid #999;
+  background-image: linear-gradient(to bottom, #ddf, #bbe);
+  transition: all 100ms ease-out;
+}
+.controle:hover {
+  border-color: #aaa;
+  background-image: linear-gradient(to bottom, #eef, #ccf);
+  font-size: 120%;
+  cursor: pointer;
+}
+
+#anterior {
+  margin-top: 10px;
+  float: left;
+}
+
+#proximo {
+  margin-top: 10px; 
+  float: right;
+}
+
+#cmt_galeria{
+    background-color: white;
+    border: 1px solid black;
+    transition: all 100ms ease-out;
+}
+
+#div_cmt_galeria{
+    text-align: center;
+}
+
+.draggable {
+  position: absolute;
+  left: 20;
+  top: 20;
+}
+
+.active-drag {
+  opacity: 0.7;
+}
+
+#div_widget_texto {
+  width: 100px;
+  height: 100px;
+  padding: 10px;
+  text-align: center;
+  background-color: white;
+  color: black;
+  word-wrap: break-word;
+  border-style: solid;
+  border-width: 2px;
+  font-size: 12px;
+  display: block;
+}

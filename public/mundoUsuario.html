@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mundo</title>
+    <link rel="shortcut icon" href="img/konata.ico" />
+    <link rel="stylesheet" href="css/mundoUsuario.css">
+</head>
+<body id="bodyMundo">
+    <button id="mudarVisualizacao-botao" onclick=modosVisualizacao()>
+        Mudar para modo de edição
+    </button>
+
+	<button id="widget-chao-botao" onclick="document.getElementById('widget-chao').style.display='block'">
+        Widget - Chão
+    </button>
+	<div id="widget-chao" class="modal">
+        <span onclick="document.getElementById('widget-chao').style.display='none'" class="close" title="Close Modal"></span>
+
+        <form id="widget-chao" class="modal-content" action="mundoUsuario.html" method="POST">
+            Opções de Chão:
+
+            <div>
+            	<img src="img/chao01.jpeg" alt="Tipo de chão 1" onclick="alteraChao(this)">
+            	<img src="img/chao02.jpeg" alt="Tipo de chão 2" onclick="alteraChao(this)">
+            	<img src="img/chao03.jpeg" alt="Tipo de chão 3" onclick="alteraChao(this)">
+            </div>
+ 
+            <div class="buttons">
+                <input class="cancelbtn" type="button" value="Cancel" onclick="document.getElementById('widget-chao').style.display='none'" />
+            </div>
+        </form>
+    </div>
+
+    <button id="widget-ceu-botao" onclick="document.getElementById('widget-ceu').style.display='block'">
+        Widget - Céu
+    </button>
+	<div id="widget-ceu" class="modal">
+        <span onclick="document.getElementById('widget-ceu').style.display='none'" class="close" title="Close Modal"></span>
+
+        <form id="widget-ceu" class="modal-content" action="mundoUsuario.html" method="POST">
+            Opções de Céu:
+
+            <div>
+            	<img src="img/ceu01.jpeg" alt="Tipo de Céu 1" height="100" width="100" onclick="alteraCeu(this)">
+            	<img src="img/ceu02.jpeg" alt="Tipo de Céu 2" height="100" width="100" onclick="alteraCeu(this)">
+            	<img src="img/ceu03.jpeg" alt="Tipo de Céu 3" height="100" width="100" onclick="alteraCeu(this)">
+            </div>
+ 
+            <div class="buttons">
+                <input class="cancelbtn" type="button" value="Cancel" onclick="document.getElementById('widget-ceu').style.display='none'" />
+            </div>
+        </form>
+    </div>
+
+    <button id="widget-galeria-botao" onclick="carregaGaleria()">
+        Widget - Galeria
+    </button>
+	<div id="widget-galeria" class="modal">
+        <span onclick="document.getElementById('widget-galeria').style.display='none'" class="close" title="Close Modal"></span>
+
+        <form id="widget-galeria" class="modal-content" action="mundoUsuario.html" method="POST">
+ 			<label>
+                Imagens: <textarea id="img-galeria" name="imagens"  placeholder="Formato: link1.png; link2.jpg; link3.jpeg; ..."></textarea>
+            </label>
+
+            <label>
+                Comentários: <textarea id="cmt-galeria" name="comentarios" placeholder="Formato: comentário do link1; comentário do link2; comentário do link3; ..."></textarea>
+            </label>
+
+            <label>
+                Ativo: <input type="checkbox" id="ativo_galeria" checked="checked">
+            </label>
+
+            <div class="buttons">
+            	<input class="savebtn" type="button" value="Save" onclick="salvaGaleria()" />
+                <input class="cancelbtn" type="button" value="Cancel" onclick="document.getElementById('widget-galeria').style.display='none'" />
+            </div>
+        </form>
+    </div>
+
+    <button id="widget-texto-botao" onclick="document.getElementById('widget-texto').style.display='block'">
+        Widget - Caixa de Texto
+    </button>
+    <div id="widget-texto" class="modal">
+        <span onclick="document.getElementById('widget-texto').style.display='none'" class="close" title="Close Modal"></span>
+
+        <form id="widget-texto" class="modal-content" action="mundoUsuario.html" method="POST">
+
+            <label>
+                Texto: <textarea id="texto_caixa_texto" name="texto_caixa"></textarea>
+            </label>
+
+            <label>
+                Fonte em px: <input id="fonte_caixa_texto" name="fonte" placeholder="Ex: 12" required></input>
+            </label>
+
+            <label>
+                Altura em px: <input id="altura_caixa_texto" name="altura" placeholder="Ex: 50" required></input>
+            </label>
+
+            <label>
+                Largura em px: <input id="largura_caixa_texto" name="largura" placeholder="Ex: 50" required></input>
+            </label>
+
+            <label>
+                Cor de fundo: <input id="fundo_caixa_texto" name="fundo" class="jscolor" value="ffffff" required>
+            </label>
+
+            <label>
+                Cor do texto: <input id="cor_caixa_texto" name="cor" class="jscolor" value="000000" required>
+            </label>
+
+            <label>
+                Borda em px: <input id="borda_tamanho_caixa_texto" name="borda_tamanho" placeholder="Ex: 2" required></input>
+            </label>
+
+            <label>
+                Tipo de borda: 
+                <select id="borda_tipo_caixa_texto">
+                    <option value="solid">solid</option>
+                    <option value="dashed">dashed</option>
+                    <option value="dotted">dotted</option>
+                    <option value="none">none</option>
+                </select>
+            </label>
+
+            <label>
+                Cor da borda: <input id="cor_borda_caixa_texto" name="cor_borda" class="jscolor" value="000000" required>
+            </label>
+
+            <label>
+                Ativo: <input type="checkbox" id="ativo_caixa_texto" checked="checked">
+            </label>
+
+            <div class="buttons">
+                <input class="savebtn" type="button" value="Salvar" onclick="carregaTexto()" />
+                <input class="cancelbtn" type="button" value="Cancel" onclick="document.getElementById('widget-texto').style.display='none'" />
+            </div>
+        </form>
+    </div>
+
+    <div id="galeria">
+          <img src="http://fegemo.github.io/cefet-web/images/philae-parts.jpg" id="slide">
+          <div id="div_cmt_galeria"><label id="cmt_galeria"></label></div>
+          <button id="anterior" class="controle">Anterior</button>
+          <button id="proximo" class="controle">Próximo</button>
+	</div>
+
+    <div id="div_widget_texto" class="draggable"></div>
+
+    <img id="madoka" src="img/madokaParadaDireita.gif">
+    <script type="text/javascript" src="javascript/movimentacaoPersonagem.js"></script>
+    <script type="text/javascript" src="javascript/dragdrop.js"></script>
+    <script type="text/javascript" src="javascript/jscolor.js"></script>
+    <script type="text/javascript" src="javascript/widgetChao.js"></script>
+    <script type="text/javascript" src="javascript/widgetCeu.js"></script>
+    <script type="text/javascript" src="javascript/widgetGaleria.js"></script>
+    <script type="text/javascript" src="javascript/widgetTexto.js"></script>
+    <script type="text/javascript" src="javascript/modosVisualizacao.js"></script>
+</body>
+</html>

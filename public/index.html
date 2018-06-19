@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Waifu's Engineering Bros</title>
+
+    <link rel="shortcut icon" href="img/konata.ico" />
+
+    <link rel="stylesheet" href=" materialDesignLite/material.min.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Lobster Two' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Risque' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+    
+    <div class="visit">
+        <h2>Visitas:</h2>
+        <a href="http://www.reliablecounter.com" target="_blank"><img src="http://www.reliablecounter.com/count.php?page=file:///home/mateus/cefet-web-final-work/home.html&digit=style/plain/6/&reloads=0" alt="" title="" border="0"></a><br /><a href="http://   www.reliablecounter.com/blog/the-best-faucet-water-filters-2018/" target="_blank" style="font-family: Geneva, Arial; font-size: 9px; color: #330010; text-decoration: none;"></a>
+    </div>
+    <div class="content">
+        
+        <!--   
+        <div class="titles">
+
+                <img src="./img/placa.png" class="placa1">
+                <div class="p1">Sobre</div>
+                <img src="./img/placa.png" class="placa2">
+                <div class="p2">Logar</div>
+                <img src="./img/placa.png" class="placa3">
+                <div class="p3">Criadores</div>
+                <img src="./img/placa.png" class="placa4">
+                <div class="p4">Cadastrar</div>
+
+        </div>
+        -->
+        <img src="./img/stair.png" id="stair-left">
+
+        <img src="./img/stair.png" id="stair-middle">
+
+        <img src="./img/stair.png" id="stair-right">
+
+        <img src="./img/cano.png" id="cano1">
+
+        <img src="./img/cano.png" id="cano2">
+
+        <img src="./img/cano.png" id="cano3">
+
+        <img src="./img/cano.png" id="cano4">
+
+
+        <img src="./img/parede.png" id="wall1">
+
+        <img src="./img/parede.png" id="wall2">
+
+    </div>
+
+    <form>
+        <input id="about" type="button" value="Sobre" onclick="window.location.href='about.html'"></input>
+    </form>
+
+    <form>
+        <input id="creators" type="button" value="Criadores" onclick="window.location.href='creators.html'"></input>
+    </form>
+
+    <button id="lib" onclick="document.getElementById('lif').style.display='block'">
+        Logar
+    </button>
+    
+    <div id="lif" class="modal">
+        <span onclick="document.getElementById('lif').style.display='none'" class="close" title="Close Modal"></span>
+
+        <form id="lif" class="modal-content" action="mundoUsuario.html" method="POST">
+            <label>
+                Usuário: <input type="text" name="username" placeholder="Insira usuário" required></input>
+            </label>
+
+            <label>
+                Senha: <input type="text" name="password" placeholder="Insira senha" required></input>
+            </label>
+
+            <div class="buttons">
+                <input class="loginbtn" type="submit" value="Ok" />
+
+                <input class="cancelbtn" type="button" value="Cancelar" onclick="document.getElementById('lif').style.display='none'" />
+            </div>
+        </form>
+    </div>
+    
+    <button id="sub" onclick="document.getElementById('suf').style.display='block'">
+        Cadastrar
+    </button>
+    
+    <div id="suf" class="modal">
+        <span onclick="document.getElementById('suf').style.display='none'" class="close" title="Close Modal"></span>
+
+        <form id="suf" class="modal-content" action="mundoUsuario.html" method="POST">
+            <label>
+                Usuário: <input type="text" name="username" placeholder="Insira usuário" required></input>
+            </label>
+
+            <label>
+                E-mail: <input type="email" name="email" placeholder="Insira e-mail" required></input>
+            </label>
+
+            <label>
+                Senha: <input type="password" name="psw" placeholder="Insira senha" required></input>
+            </label>
+
+            <label>
+                Repetir senha: <input type="password" name="repeat-psw" placeholder="Repita a senha" required></input>
+            </label>
+
+            <div class="buttons">
+
+                <input class="signup" type="submit" value="Ok" />
+
+                <input class="cancelbtn" type="button" value="Cancelar" onclick="document.getElementById('suf').style.display='none'" />
+            </div>
+        </form>
+    </div>
+    
+    <img id="madoka" src="img/madokaParadaDireita.gif">
+
+    <script src="materialDesignLite/material.min.js"></script>
+    <script src="javascript/code.js"></script>
+</body>
+</html>
