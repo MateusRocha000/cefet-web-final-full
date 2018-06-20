@@ -1,7 +1,7 @@
 "use strict";
 
-//Verifica se o user está logado ao acessar uma pagina
-module.exports = function isLoged(req, res, next) {
+//Verifica se o usuario está logado ao acessar uma pagina
+module.exports = function(req, res, next) {
   if (req.session.userId && req.session) {
     return next();
   } else {

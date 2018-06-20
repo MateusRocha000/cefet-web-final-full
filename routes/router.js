@@ -5,21 +5,23 @@ var User = require('../models/user');
 var MidAuth = require('../middleware/authenticationRequired');
 var MidUserVer = require('../middleware/userVerified');
 
-// GET tela inicial
+//GET tela inicial
 router.get('/', function (req, res, next) {
   return res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
-//POST cadastro de novo user ou login de um já existente
-router.post('/', function (req, res, next) {
-  if (req.body.password !== req.body.passwordConfirmation) {
-    let err = new Error('Senhas nao coincidem.');
-    err.status = 400;
-    res.send("Senhas nao coincidem");
-    return next(err);
-  }
+router.use('/about', require('./about'))
 
+//POST cadastro de novo usuario ou login de um já existente
+router.post('/', function (req, res, next) {
   if (req.body.email && req.body.username && req.body.password && req.body.passwordConfirmation) {
+    if (req.body.password !== req.body.passwordConfirmation) {
+      let err = new Error('Senhas nao coincidem.');
+      err.status = 400;
+      res.send("Senhas nao coincidem");
+      return next(err);
+    }
+
     let userData = {
       email: req.body.email,
       username: req.body.username,
@@ -53,7 +55,7 @@ router.post('/', function (req, res, next) {
   }
 })
 
-// GET acesso ao perfil individual
+//GET acesso ao perfil individual
 router.get('/profile', function (req, res, next) {
   User.findById(req.session.userId)
     .exec(function (error, user) {
@@ -71,10 +73,10 @@ router.get('/profile', function (req, res, next) {
     });
 });
 
-// GET para logout do sistema
+//GET para logout do sistema
 router.get('/logout', function (req, res, next) {
   if (req.session) {
-    // delete session object
+    //Deleta o objeto da sessão no logout
     req.session.destroy(function (err) {
       if (err) {
         return next(err);
@@ -86,7 +88,7 @@ router.get('/logout', function (req, res, next) {
 });
 
 /*
-//Adicionar autenticação para visualizar determinad perfil
+//Adicionar autenticação para visualizar determinado perfil
 router.get('/profile', MidAuth.isLoged, function(req, res, next) {
   //...
 });

@@ -1,7 +1,7 @@
 "use strict";
 
-//Verifica se o user é o dono da pagina
-module.exports = function isUser(req, res, next) {
+//Verifica se o usuario é o dono da pagina
+module.exports = function(req, res, next) {
   if (1) { //TO-DO ****
     return next();
   } else {
