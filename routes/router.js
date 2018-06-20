@@ -3,15 +3,14 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 var MidAuth = require('../middleware/authenticationRequired');
-var AuthController = require('../controllers/authController');
+var MidUserVer = require('../middleware/userVerified');
 
-// GET route for reading data
-router.get('/', function (req, res, next) { 
-  return res.sendFile(path.join(__dirname + '/templateLogReg/index.html'));
+// GET tela inicial
+router.get('/', function (req, res, next) {
+  return res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-//router.get('/', AuthController.loadIndex(req, res, next)); ERROR, REQ NOT DEFINED :(
 
-//POST route for updating data
+//POST cadastro de novo user ou login de um já existente
 router.post('/', function (req, res, next) {
   // confirm that user typed same password twice
   if (req.body.password !== req.body.passwordConfirmation) {
@@ -55,7 +54,7 @@ router.post('/', function (req, res, next) {
   }
 })
 
-// GET route after registering
+// GET acesso ao perfil individual
 router.get('/profile', function (req, res, next) {
   User.findById(req.session.userId)
     .exec(function (error, user) {
@@ -73,7 +72,7 @@ router.get('/profile', function (req, res, next) {
     });
 });
 
-// GET for logout logout
+// GET para logout do sistema
 router.get('/logout', function (req, res, next) {
   if (req.session) {
     // delete session object

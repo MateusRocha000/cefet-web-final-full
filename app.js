@@ -8,17 +8,17 @@ var MongoStore = require('connect-mongo')(session);
 
 var bodyParser = require('body-parser');
 
-//connect to MongoDB
-mongoose.connect('mongodb://localhost/testForAuth');
+//conexão ao banco MongoDB
+mongoose.connect('mongodb://localhost/waifuWeb');
 var db = mongoose.connection;
 
-//handle mongo error
+//Erro no mongo
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
   // we're connected!
 });
 
-//use sessions for tracking logins
+//Usando sessões para rastrear o login 
 app.use(session({
   secret: 'waifus irao dominieren the bce welt 758463582347',
   resave: true,
@@ -33,7 +33,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // serve static files from template
-app.use(express.static(__dirname + '/templateLogReg'));
+//app.use(express.static(__dirname + '/templateLogReg'));
+app.use(express.static(__dirname + '/public'));
 
 // include routes
 var routes = require('./routes/router');
