@@ -2,20 +2,19 @@
 var express = require('express');
 var app = express();
 var session = require('express-session');
-
 var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(session);
-
 var bodyParser = require('body-parser');
+var routes = require('./routes/router');
 
 //conexão ao banco MongoDB
-mongoose.connect('mongodb://localhost/waifuWeb');
+mongoose.connect('mongodb://localhost/WaifusEngineeringBros');
 var db = mongoose.connection;
 
-//Erro no mongo
-db.on('error', console.error.bind(console, 'connection error:'));
+//Mongo
+db.on('error', console.error.bind(console, 'Erro na conexao com o db:'));
 db.once('open', function () {
-  // we're connected!
+  console.log("db funcionando.")
 });
 
 //Usando sessões para rastrear o login 
@@ -28,33 +27,32 @@ app.use(session({
   })
 }));
 
-// parse incoming requests
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-// serve static files from template
-//app.use(express.static(__dirname + '/templateLogReg'));
+//Caminho dos arquivos de exibicao
 app.use(express.static(__dirname + '/public'));
 
-// include routes
-var routes = require('./routes/router');
+//Rotas
 app.use('/', routes);
 
-// catch 404 and forward to error handler
+//Recebe requisições  
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ 
+  extended: false 
+}));
+
+//Error handler (lida com o querido 404)
 app.use(function (req, res, next) {
-  var err = new Error('File Not Found');
+  let err = new Error('File Not Found');
   err.status = 404;
   next(err);
 });
 
-// error handler
-// define as the last app.use callback
+//Error handler (definido como o ultimo app.use callback)
 app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.send(err.message);
 });
 
-// listen on port 3000
+//Escutando na porta 3000
 app.listen(3000, function () {
-  console.log('Express app listening on port 3000');
+  console.log('Express app escutando na porta 3000...');
 });

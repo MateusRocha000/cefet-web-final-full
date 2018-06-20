@@ -12,7 +12,6 @@ router.get('/', function (req, res, next) {
 
 //POST cadastro de novo user ou login de um já existente
 router.post('/', function (req, res, next) {
-  // confirm that user typed same password twice
   if (req.body.password !== req.body.passwordConfirmation) {
     let err = new Error('Senhas nao coincidem.');
     err.status = 400;
@@ -87,7 +86,7 @@ router.get('/logout', function (req, res, next) {
 });
 
 /*
-//Add authentication required to view personal pages
+//Adicionar autenticação para visualizar determinad perfil
 router.get('/profile', MidAuth.isLoged, function(req, res, next) {
   //...
 });
