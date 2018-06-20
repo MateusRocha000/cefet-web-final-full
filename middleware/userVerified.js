@@ -1,3 +1,4 @@
+"use strict";
 function isUser(req, res, next) {
     if (1) { //TO-DO ****
       return next();

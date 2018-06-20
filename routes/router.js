@@ -1,3 +1,4 @@
+"use strict";
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
@@ -5,7 +6,7 @@ var MidAuth = require('../middleware/authenticationRequired');
 var AuthController = require('../controllers/authController');
 
 // GET route for reading data
-router.get('/', function (req, res, next) {
+router.get('/', function (req, res, next) { 
   return res.sendFile(path.join(__dirname + '/templateLogReg/index.html'));
 });
 //router.get('/', AuthController.loadIndex(req, res, next)); ERROR, REQ NOT DEFINED :(

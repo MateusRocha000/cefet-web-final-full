@@ -1,6 +1,8 @@
+"use strict";
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
+//Tabela usuario no banco
 var UserSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -24,7 +26,7 @@ var UserSchema = new mongoose.Schema({
   }
 });
 
-//hashing a password before saving it to the database
+//Realiza o hashing da senha antes de salvar ela no banco
 UserSchema.pre('save', function (next) {
   var user = this;
   bcrypt.hash(user.password, 10, function (err, hash) {
@@ -36,7 +38,7 @@ UserSchema.pre('save', function (next) {
   })
 });
 
-//authenticate input against database
+//Autenticação da entrada sobre o banco
 UserSchema.statics.authenticate = function (email, password, callback) {
   User.findOne({ email: email })
     .exec(function (err, user) {
