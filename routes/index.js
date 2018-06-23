@@ -10,8 +10,6 @@ router.get('/', function (req, res, next) {
   return res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
-router.use('/about', require('./about'))
-
 //POST cadastro de novo usuario ou login de um já existente
 router.post('/', function (req, res, next) {
   if (req.body.email && req.body.username && req.body.password && req.body.passwordConfirmation) {

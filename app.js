@@ -5,19 +5,20 @@ var session = require('express-session');
 var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(session);
 var bodyParser = require('body-parser');
-var routes = require('./routes/router');
+var router = require('./routes/router');
+var about = require('./routes/about');
+var creators = require('./routes/creators');
 
-//conexão ao banco MongoDB
+//MongoDB
 mongoose.connect('mongodb://localhost/WaifusEngineeringBros');
 var db = mongoose.connection;
 
-//Mongo
 db.on('error', console.error.bind(console, 'Erro na conexao com o db:'));
 db.once('open', function () {
   console.log("db funcionando.")
 });
 
-//Usando sessões para rastrear o login 
+//Sessões para rastrear o login 
 app.use(session({
   secret: 'waifus irao dominieren the bce welt 758463582347',
   resave: true,
@@ -27,26 +28,25 @@ app.use(session({
   })
 }));
 
-//Caminho dos arquivos de exibicao
-app.use(express.static(__dirname + '/public'));
-
 //Rotas
-app.use('/', routes);
+app.use(express.static(__dirname + '/public'));
+app.use('/', router);
+app.use('/about', about);
+app.use('/creators', creators);
 
-//Recebe requisições  
+//Requisições  
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ 
   extended: false 
 }));
 
-//Error handler (lida com o querido 404)
+//Error handler
 app.use(function (req, res, next) {
-  let err = new Error('File Not Found');
+  let err = new Error('Arquivo nao encontrado');
   err.status = 404;
   next(err);
 });
 
-//Error handler (definido como o ultimo app.use callback)
 app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.send(err.message);
