@@ -5,8 +5,16 @@ exports.index = function(req, res, next) {
   return res.sendFile(path.join(__dirname + '/../public/index.html'));
 };
 
+/*
 //Verifica se é cadastro ou login
 exports.cadastroLogin = function (req, res, next) {
+  if (!req.body || req.body === undefined) {
+    let err = new Error('Erro na requisicao.');
+    err.status = 400;
+    res.send("Erro na requisicao");
+    return next(err);
+  }
+
   if (req.body.email && req.body.username && req.body.password && req.body.passwordConfirmation) {
     if (req.body.password !== req.body.passwordConfirmation) {
       let err = new Error('Senhas nao coincidem.');
@@ -15,14 +23,14 @@ exports.cadastroLogin = function (req, res, next) {
       return next(err);
     }
 
-    let userData = {
+    let userNow = {
       email: req.body.email,
       username: req.body.username,
       password: req.body.password,
       passwordConfirmation: req.body.passwordConfirmation,
     }
 
-    User.create(userData, function (error, user) {
+    User.create(userNow, function (error, user) {
       if (error) {
         return next(error);
       } else {
@@ -47,3 +55,4 @@ exports.cadastroLogin = function (req, res, next) {
     return next(err);
   }
 };
+*/

@@ -9,14 +9,13 @@ var index = require('./routes/index');
 var about = require('./routes/about');
 var creators = require('./routes/creators');
 
-
 //MongoDB
 mongoose.connect('mongodb://localhost/WaifusEngineeringBros');
 var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'Erro na conexao com o db:'));
 db.once('open', function () {
-  console.log("db funcionando.")
+  console.log("db funcionando...")
 });
 
 //Sessões para rastrear o login 
