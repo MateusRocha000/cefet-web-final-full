@@ -5,6 +5,7 @@ exports.index = function(req, res, next) {
   return res.sendFile(path.join(__dirname + '/../public/index.html'));
 };
 
+//Verifica se é cadastro ou login
 exports.cadastroLogin = function (req, res, next) {
   if (req.body.email && req.body.username && req.body.password && req.body.passwordConfirmation) {
     if (req.body.password !== req.body.passwordConfirmation) {
@@ -45,4 +46,4 @@ exports.cadastroLogin = function (req, res, next) {
     err.status = 400;
     return next(err);
   }
-}
+};
