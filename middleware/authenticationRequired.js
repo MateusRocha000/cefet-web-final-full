@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 //Verifica se o usuario está logado ao acessar uma pagina
 module.exports = function(req, res, next) {

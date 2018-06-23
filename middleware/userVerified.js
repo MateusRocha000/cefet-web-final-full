@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 //Verifica se o usuario é o dono da pagina
 module.exports = function(req, res, next) {
