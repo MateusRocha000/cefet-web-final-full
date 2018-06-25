@@ -1,23 +1,27 @@
-var madoka = document.getElementById('madoka');
-var cano1 = document.getElementById('cano1');
-var cano2 = document.getElementById('cano2');
-var cano3 = document.getElementById('cano3');
-var cano4 = document.getElementById('cano4');
-var wall1 = document.getElementById('wall1');
-var wall2 = document.getElementById('wall2');
+let madoka = document.getElementById('madoka');
+let cano1 = document.getElementById('cano1');
+let cano2 = document.getElementById('cano2');
+let cano3 = document.getElementById('cano3');
+let cano4 = document.getElementById('cano4');
+
+let wall1 = document.getElementById('wall1');
+let wall2 = document.getElementById('wall2');
+
+let stair1 = document.getElementById('stair-left');
 
 const altChao = 46;
 
-var posicaoX = 0;
-var posicaoY = altChao;
+let posicaoX = 0;
+let posicaoY = altChao;
 
-var jumping = false;
-var climbing = false;
-var velY = 0;
+let jumping = false;
+let climbing = false;
+let velY = 0;
 const velJumpInicial = 4;
+const velClimb = 3;
 const gravity = 0.1;
 
-var imagemEscolhida = 0;
+let imagemEscolhida = 0;
 
 document.onkeydown = movimentandoX;
 document.onkeyup = paradaX;
@@ -66,15 +70,30 @@ function movimentandoX(e) {
 
     if (e.keyCode==38)
     {
-        if (!jumping)
+        if (climb(madoka,stair1) && !climbing)
         {
-            jumping = true;
+            climbing = true; 
+            velY = velClimb;
+        }
+        else if (!jumping)
+        {
+            jumping = true; 
             velY = velJumpInicial;
             window.requestAnimationFrame(attAvatar);  
         } 
         if (colisao(madoka,cano1) || colisao(madoka,cano2) || colisao(madoka,cano3) || colisao(madoka,cano4))
         {
             posicaoY = 0;
+        }
+        
+    }
+
+    if (e.keyCode==40)
+    {
+        posicaoY -= velJumpInicial;
+        if (posicaoY <= altChao)
+        {
+            posicaoY = altChao;
         }
     }
 
@@ -94,17 +113,17 @@ function paradaX() {
 
 function colisao(obj1, obj2)
 {
-    var left_obj1 = obj1.x + 25;
-    var right_obj1 = obj1.x + obj1.width - 25;
-    var bot_obj1 = obj1.y;
-    var top_obj1 = obj1.y + obj1.height;
+    let left_obj1 = obj1.x + 25;
+    let right_obj1 = obj1.x + obj1.width - 25;
+    let bot_obj1 = obj1.y;
+    let top_obj1 = obj1.y + obj1.height;
 
-    var left_obj2 = obj2.x;
-    var right_obj2 = obj2.x + obj2.width;
-    var bot_obj2 = obj2.y;
-    var top_obj2 = obj2.y + obj2.height;
+    let left_obj2 = obj2.x;
+    let right_obj2 = obj2.x + obj2.width;
+    let bot_obj2 = obj2.y;
+    let top_obj2 = obj2.y + obj2.height;
 
-    var crash = true;
+    let crash = true;
     if ((right_obj1 < left_obj2) || (left_obj1 > right_obj2) || (bot_obj1 > top_obj2) || (bot_obj2 > top_obj1))
     {
         crash = false;
@@ -112,11 +131,31 @@ function colisao(obj1, obj2)
     return crash;
 }
 
+function climb(obj1,obj2)
+{
+    let left_obj1 = obj1.x + 25;
+    let right_obj1 = obj1.x + obj1.width - 25;
+    let bot_obj1 = obj1.y;
+    let top_obj1 = obj1.y + obj1.height;
+
+    let left_obj2 = obj2.x;
+    let right_obj2 = obj2.x + obj2.width;
+    let bot_obj2 = obj2.y;
+    let top_obj2 = obj2.y + obj2.height;
+
+    let crash = false;
+    if ((right_obj1 < right_obj2) && (left_obj1 > left_obj2) || (bot_obj1 > top_obj2))
+    {
+        crash = true;
+    }
+    return crash;
+}
 
 function attAvatar()
 {
     if (jumping)
     {
+        climbing = false;
         posicaoY += velY;
         velY -= gravity;
         if (posicaoY <= altChao)
@@ -129,4 +168,14 @@ function attAvatar()
         window.requestAnimationFrame(attAvatar);
     }
 
+    else if(climbing)
+    {
+        jumping = false;
+        posicaoY += velY;
+        if (posicaoY >= stair1.y + stair1.height + 5)
+        {
+            posicaoY = stair1.y + stair1.height + 5;
+        }
+        madoka.style.bottom = posicaoY + 'px';
+    }
 }
