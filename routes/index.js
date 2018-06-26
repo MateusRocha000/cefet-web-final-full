@@ -18,9 +18,9 @@ router.post('/', function (req, res, next) {
 
   if (req.body.email && req.body.username && req.body.password && req.body.passwordConfirmation) {
     if (req.body.password !== req.body.passwordConfirmation) {
-      let err = new Error('Senhas nao coincidem.');
+      let err = new Error('Senhas não coincidem.');
       err.status = 400;
-      res.send("Senhas nao coincidem");
+      res.send("Senhas não coincidem");
       return next(err);
     }
 
@@ -51,14 +51,16 @@ router.post('/', function (req, res, next) {
       }
     });
   } else {
-    let err = new Error('Todos campos sao requeridos.');
+    let err = new Error('Todos campos são requeridos.');
     err.status = 400;
     return next(err);
   }
 });
 
+// Como passar os dados de usuário para o profileController?
+
 //GET acesso ao perfil individual
-router.get('/profile', function (req, res, next) {
+/*router.get('/profile', function (req, res, next) {
   User.findById(req.session.userId)
     .exec(function (error, user) {
       if (error) {
@@ -69,11 +71,12 @@ router.get('/profile', function (req, res, next) {
           err.status = 400;
           return next(err);
         } else {
-          return res.send('<h1>Nome: </h1>' + user.username + '<h2>Email: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
+         // return res.send('<h1>Nome: </h1>' + user.username + '<h2>Email: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
+         return res.redirect('/profile');
         }
       }
     });
-});
+});*/
 
 //GET para logout do sistema
 router.get('/logout', function (req, res, next) {
