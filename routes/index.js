@@ -8,7 +8,7 @@ var indexController = require('../controllers/indexController');
 router.get('/', indexController.index);
 
 //POST tela index
-router.post('/', function(req, res, next) {
+router.post('/', function (req, res, next) {
   if (!req.body || req.body === undefined) {
     let err = new Error('Erro na requisicao.');
     err.status = 400;
@@ -27,11 +27,10 @@ router.post('/', function(req, res, next) {
     let userNow = {
       email: req.body.email,
       username: req.body.username,
-      password: req.body.password,
-      passwordConfirmation: req.body.passwordConfirmation,
+      password: req.body.password
     }
 
-    User.create(userNow, function(error, user) {
+    User.create(userNow, function (error, user) {
       if (error) {
         return next(error);
       } else {

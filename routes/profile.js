@@ -1,14 +1,27 @@
 'use strict';
 var express = require('express');
 var router = express.Router();
-var profileController = require('../controllers/profileController');
+var path = require("path");
+var User = require('../models/user');
 
-//GET tela profile
-router.get('/', profileController.index);
+//GET tela profile individual
+router.get('/', function (req, res, next) {
+  console.log(req.session.userId)//req.session.userId = undefined ... por isso nao encontro nada no banco
+  User.contents(req.body.logemail, function (error, userContent) {
+    if (error || !userContent) {
+      let err = new Error('Falha ao carregar o mundo do usuario.');
+      err.status = error.status;
+      return next(err);
+    } else {
+      console.log(userContent)//userContent contem as informacoes do determinado usuario 
+      return res.sendFile(path.join(__dirname + '/../public/mundoUsuario.html'));
+    }
+  });
+});
 
-// Como passar os dados de usuário para o profileController?
 //GET acesso ao perfil individual
-/*router.get('/profile', function (req, res, next) {
+/*
+router.get('/profile', function (req, res, next) {
   User.findById(req.session.userId)
     .exec(function (error, user) {
       if (error) {
@@ -24,7 +37,8 @@ router.get('/', profileController.index);
         }
       }
     });
-});*/
+});
+*/
 
 /*
 //Adicionar autenticação para visualizar determinado perfil
