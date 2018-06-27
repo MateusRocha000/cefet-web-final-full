@@ -9,6 +9,7 @@ var index = require('./routes/index');
 var about = require('./routes/about');
 var creators = require('./routes/creators');
 var profile = require('./routes/profile');
+var logout = require('./routes/logout');
 
 //MongoDB
 mongoose.connect('mongodb://localhost/WaifusEngineeringBros');
@@ -41,6 +42,7 @@ app.use('/', index);
 app.use('/about', about);
 app.use('/creators', creators);
 app.use('/profile', profile);
+app.use('/logout', logout);
 
 //Error handler
 app.use(function (req, res, next) {

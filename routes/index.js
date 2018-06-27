@@ -8,7 +8,7 @@ var indexController = require('../controllers/indexController');
 router.get('/', indexController.index);
 
 //POST tela index
-router.post('/', function (req, res, next) {
+router.post('/', function(req, res, next) {
   if (!req.body || req.body === undefined) {
     let err = new Error('Erro na requisicao.');
     err.status = 400;
@@ -31,7 +31,7 @@ router.post('/', function (req, res, next) {
       passwordConfirmation: req.body.passwordConfirmation,
     }
 
-    User.create(userNow, function (error, user) {
+    User.create(userNow, function(error, user) {
       if (error) {
         return next(error);
       } else {
@@ -56,47 +56,5 @@ router.post('/', function (req, res, next) {
     return next(err);
   }
 });
-
-// Como passar os dados de usuário para o profileController?
-
-//GET acesso ao perfil individual
-/*router.get('/profile', function (req, res, next) {
-  User.findById(req.session.userId)
-    .exec(function (error, user) {
-      if (error) {
-        return next(error);
-      } else {
-        if (user === null) {
-          let err = new Error('Sem autorizacao.');
-          err.status = 400;
-          return next(err);
-        } else {
-         // return res.send('<h1>Nome: </h1>' + user.username + '<h2>Email: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
-         return res.redirect('/profile');
-        }
-      }
-    });
-});*/
-
-//GET para logout do sistema
-router.get('/logout', function (req, res, next) {
-  if (req.session) {
-    //Deleta o objeto da sessão no logout
-    req.session.destroy(function (err) {
-      if (err) {
-        return next(err);
-      } else {
-        return res.redirect('/');
-      }
-    });
-  }
-});
-
-/*
-//Adicionar autenticação para visualizar determinado perfil
-router.get('/profile', MidAuth.isLoged, function(req, res, next) {
-  //...
-});
-*/
 
 module.exports = router;
