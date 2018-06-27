@@ -3,6 +3,16 @@ if(localStorage.bg !== ""  && localStorage.bg !== undefined)
 if(localStorage.cor_ceu !== "" && localStorage.cor_ceu !== undefined)
     document.body.style.backgroundColor = localStorage.cor_ceu;
 
+xmlhttp = new XMLHttpRequest();
+   xmlhttp.open("GET","http://localhost:3000/dadosUser/" + localStorage.email, true);
+   xmlhttp.onreadystatechange=function(){
+         if (xmlhttp.readyState==4 && xmlhttp.status==200){
+           var respemail=JSON.parse(xmlhttp.responseText);
+           respemail;
+         }
+   }
+   xmlhttp.send();
+
 function alteraCeu(e) {
 	let caminho = e.src.split('ceu');
     if(document.body.style.backgroundImage === '')

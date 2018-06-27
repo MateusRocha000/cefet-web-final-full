@@ -61,7 +61,7 @@
 
         <form id="lif" class="modal-content" action="/" method="post">
             <label>
-                E-mail: <input type="text" name="logemail" placeholder="E-mail" required></input>
+                E-mail: <input id="email1" type="text" name="logemail" placeholder="E-mail" required></input>
             </label>
 
             <label>
@@ -69,7 +69,7 @@
             </label>
 
             <div class="buttons">
-                <input class="loginbtn" type="submit" value="LOGIN" />
+                <input class="loginbtn" type="submit" value="LOGIN" onclick="salvaEmailLogin()" />
 
                 <input class="cancelbtn" type="button" value="Cancelar" onclick="document.getElementById('lif').style.display='none'" />
             </div>
@@ -89,7 +89,7 @@
             </label>
 
             <label>
-                E-mail: <input type="email" name="email" placeholder="E-mail" required></input>
+                E-mail: <input id="email2" type="email" name="email" placeholder="E-mail" required></input>
             </label>
 
             <label>
@@ -102,7 +102,7 @@
 
             <div class="buttons">
 
-                <input class="signup" type="submit" value="REGISTER" />
+                <input class="signup" type="submit" value="REGISTER" onclick="salvaEmailCadastro()" />
 
                 <input class="cancelbtn" type="button" value="Cancelar" onclick="document.getElementById('suf').style.display='none'" />
             </div>

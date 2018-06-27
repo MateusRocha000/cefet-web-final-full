@@ -122,9 +122,3 @@ body{
   font-size: 12px;
   display: block;
 }
-
-#logout{
-  position: fixed;
-  top: 0;
-  right: 0;
-}

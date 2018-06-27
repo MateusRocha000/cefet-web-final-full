@@ -9,6 +9,8 @@ var index = require('./routes/index');
 var about = require('./routes/about');
 var creators = require('./routes/creators');
 var profile = require('./routes/profile');
+var dadosUser = require('./routes/dadosUser');
+var saveDadosUser = require('./routes/saveDadosUser');
 var logout = require('./routes/logout');
 
 //MongoDB
@@ -42,6 +44,8 @@ app.use('/', index);
 app.use('/about', about);
 app.use('/creators', creators);
 app.use('/profile', profile);
+app.use('/dadosUser', dadosUser);
+app.use('/saveDadosUser', saveDadosUser);
 app.use('/logout', logout);
 
 //Error handler
@@ -55,6 +59,8 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.send(err.message);
 });
+
+
 
 //Escutando na porta 3000
 app.listen(3000, function () {

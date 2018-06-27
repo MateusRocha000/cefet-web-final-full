@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
-//Tabela usuario
+//Tabela usuario no banco
 var UserSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -20,19 +20,67 @@ var UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  floor: {
+  passwordConfirmation: {
+    type: String,
+    required: true,
+  },
+  background: {
     type: String
   },
-  sky: {
+  skyColor: {
     type: String
   },
-  image: {
+  images: {
     type: String
   },
-  textNote: {
+  textActive: {
     type: String
-  }
-});
+  },
+  textHeight: {
+    type: String
+  },
+  textFont: {
+    type: String
+  },
+  textWidth: {
+    type: String
+  },
+  textTop: {
+    type: String
+  },
+  textLeft: {
+    type: String
+  },
+  textBackground: {
+    type: String
+  },
+  textColor: {
+    type: String
+  },
+  textBorderColor: {
+    type: String
+  },
+  textSizeBorder: {
+    type: String
+  },
+  textBorderType: {
+    type: String
+  },    
+  comments: {
+    type: String
+  },
+  galleryActive: {
+    type: String
+  },
+  links: {
+    type: String
+  },
+  visits: {
+    type: String
+  },
+  text: {
+    type: String
+}});
 
 //Realiza o hashing da senha antes de salvar ela no banco
 UserSchema.pre('save', function (next) {
@@ -45,6 +93,60 @@ UserSchema.pre('save', function (next) {
     next();
   })
 });
+
+UserSchema.statics.sendWidgets = function(email,callback){
+   User.findOne({ email: email })
+    .exec(function (err, user) {
+      return callback(user);
+    });
+}
+
+UserSchema.statics.saveWidgets = function(usr,callback){
+  if(usr.tipo === "sky")
+  {
+    console.log(usr.email);
+    User.update(
+       { email: usr.email },
+       { $set:
+          {
+            background: usr.bg,
+            skyColor: usr.skyColor
+          }
+       }
+    ).exec(function (err, usr) {
+       return callback(usr);
+     });
+  }
+  else if (usr.tipo === "floor")
+  {
+    console.log(usr.email);
+    User.update(
+       { email: usr.email },
+       { $set:
+          {
+            background: usr.bg
+          }
+       }
+    ).exec(function (err, usr) {
+       return callback(usr);
+     });
+  }
+}
+
+UserSchema.statics.contents = function (email, callback) {
+  console.log("entrou contents");
+  User.findOne({ email: email })
+    .exec(function (err, user) {
+      if (err) {
+        return callback(err)
+      } else if (!user) {
+        var err = new Error('usuario nao encontrado.');
+        err.status = 404;
+        return callback(err);
+      }
+      return callback(null, user);
+    });
+}
 
 //Autenticação da entrada sobre o banco
 UserSchema.statics.authenticate = function (email, password, callback) {
@@ -64,27 +166,6 @@ UserSchema.statics.authenticate = function (email, password, callback) {
           return callback();
         }
       })
-    });
-}
-
-UserSchema.statics.contents = function (email, callback) {
-  User.findOne({ email: email })
-    .exec(function (err, user) {
-      if (err) {
-        return callback(err)
-      } else if (!user) {
-        var err = new Error('usuario nao encontrado.');
-        err.status = 404;
-        return callback(err);
-      }
-
-      let userContent = {
-        floor: user.floor,
-        sky: user.sky,
-        image: user.image,
-        textNote: user.textNote
-      }
-      return callback(null, userContent);
     });
 }
 

@@ -43,6 +43,14 @@ if(localStorage.imagemEscolhida !== ""  && localStorage.imagemEscolhida !== unde
         madoka.src = "img/madokaParadaDireita.gif";
 }
 
+function salvaEmailLogin()
+{
+    localStorage.email = document.getElementById('email1').value;
+}
+function salvaEmailCadastro()
+{
+    localStorage.email = document.getElementById('email2').value;
+}
 
 function movimentandoX(e) {
     if(e.keyCode==39){
