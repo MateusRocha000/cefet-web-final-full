@@ -3,9 +3,7 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 
-//GET dados do usuario
 router.get("/:email", function(req, res) {
-    // res.send(User.sendWidgets(req.params.email));
     User.contents(req.params.email, function (error, user) {
     	if (error || !user) {
       let err = new Error('Falha ao carregar o mundo do usuario.');

@@ -14,8 +14,8 @@ var saveDadosUser = require('./routes/saveDadosUser');
 var logout = require('./routes/logout');
 
 //MongoDB
-//mongoose.connect('mongodb://localhost/WaifusEngineeringBros');
-mongoose.connect('mongodb://craviee:lol999@ds121331.mlab.com:21331/waifusengineeringbros');
+mongoose.connect('mongodb://localhost/WaifusEngineeringBros');
+//mongoose.connect('mongodb://craviee:lol999@ds121331.mlab.com:21331/waifusengineeringbros');
 var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'Erro na conexao com o db:'));
@@ -62,6 +62,7 @@ app.use(function (err, req, res, next) {
 });
 
 //Escutando na porta 3000
-app.listen(process.env.PORT || 5000, function () {
+app.listen(3000, function () {
+//app.listen(process.env.PORT || 5000, function () {
   console.log('Express app escutando na porta 3000...');
 });

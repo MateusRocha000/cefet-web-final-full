@@ -2,12 +2,11 @@
 var express = require('express');
 var router = express.Router();
 var profileController = require('../controllers/profileController');
+var User = require('../models/user');
 
-//GET tela profile
 router.get('/', profileController.index);
 
 router.get('/:username', function (req, res, next) {
-    console.log(req.params.username)
     User.visitor(req.params.username, function (error, user) {
     if (error || !user) {
         let err = new Error('Falha ao carregar o mundo do usuario.');

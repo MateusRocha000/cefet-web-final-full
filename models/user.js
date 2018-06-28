@@ -2,7 +2,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
-//Tabela usuario no banco
 var UserSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -79,7 +78,6 @@ var UserSchema = new mongoose.Schema({
     type: String
 }});
 
-//Realiza o hashing da senha antes de salvar ela no banco
 UserSchema.pre('save', function (next) {
   var user = this;
   bcrypt.hash(user.password, 10, function (err, hash) {
@@ -231,7 +229,6 @@ UserSchema.statics.visitor = function (username, callback) {
     });
 }
 
-//Autenticação da entrada sobre o banco
 UserSchema.statics.authenticate = function (email, password, callback) {
   User.findOne({ email: email })
     .exec(function (err, user) {

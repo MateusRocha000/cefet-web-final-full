@@ -4,10 +4,8 @@ var router = express.Router();
 var User = require('../models/user');
 var indexController = require('../controllers/indexController');
 
-//GET tela index
 router.get('/', indexController.index);
 
-//POST tela index
 router.post('/', function (req, res, next) {
   if (!req.body || req.body === undefined) {
     let err = new Error('Erro na requisicao.');
