@@ -11,7 +11,7 @@ router.get("/:json", function(req, res) {
     User.saveWidgets(dados, function (error, user) {
     	if (error || !user) {
       let err = new Error('Falha ao carregar o mundo do usuario.');
-      err.status = error.status;
+      // err.status = error.status;
       // return next(err);
     } else {
       // console.log(user)//userContent contem as informacoes do determinado usuario 

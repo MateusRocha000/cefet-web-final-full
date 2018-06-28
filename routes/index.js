@@ -46,7 +46,7 @@ router.post('/', function (req, res, next) {
       textBorderColor: "",
       textSizeBorder: "",
       textBorderType: "",
-      visits: "",
+      visits: 0,
       text: ""
     }
 

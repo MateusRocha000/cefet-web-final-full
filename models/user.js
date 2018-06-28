@@ -73,7 +73,7 @@ var UserSchema = new mongoose.Schema({
     type: String
   },
   visits: {
-    type: String
+    type: Number
   },
   text: {
     type: String
@@ -182,6 +182,21 @@ UserSchema.statics.saveWidgets = function(usr,callback){
        }
     ).exec(function (err, usr) {
        return callback(usr);
+     });
+  }
+  else if (usr.tipo === "visits")
+  {
+    console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+      User.update(
+       { email: usr.email },
+       { $inc:
+          {
+            visits: 1
+          }
+       }
+    ).exec(function (err, usr) {
+        console.log(usr);
+        return callback(usr);
      });
   }
 }

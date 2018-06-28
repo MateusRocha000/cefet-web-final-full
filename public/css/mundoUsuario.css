@@ -122,3 +122,12 @@ body{
   font-size: 12px;
   display: block;
 }
+
+#visitas {
+  border-style: solid;
+  border-width: 2px;
+  font-size: 24px;
+  display: inline;
+  background-color: white;
+  margin: 5px; 
+}

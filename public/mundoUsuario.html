@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="css/mundoUsuario.css">
 </head>
 <body id="bodyMundo">
+
+        <div id="visitas">
+         Visitas: 
+        <span id="n_visitas">
+             0
+        </span>
+    </div>
+    
     <button id="mudarVisualizacao-botao" onclick=modosVisualizacao()>
         Mudar para modo de edição
     </button>
@@ -82,6 +90,8 @@
     <button id="widget-texto-botao" onclick="document.getElementById('widget-texto').style.display='block'">
         Widget - Caixa de Texto
     </button>
+
+
     <div id="widget-texto" class="modal">
         <span onclick="document.getElementById('widget-texto').style.display='none'" class="close" title="Close Modal"></span>
 
@@ -140,6 +150,9 @@
         </form>
     </div>
 
+
+
+
     <div id="galeria">
           <img src="http://fegemo.github.io/cefet-web/images/philae-parts.jpg" id="slide">
           <div id="div_cmt_galeria"><label id="cmt_galeria"></label></div>
@@ -148,6 +161,7 @@
 	</div>
 
     <div id="div_widget_texto" class="draggable"></div>
+
 
     <img id="madoka" src="img/madokaParadaDireita.gif">
     <script type="text/javascript" src="javascript/movimentacaoPersonagem.js"></script>

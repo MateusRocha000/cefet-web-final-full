@@ -22,6 +22,20 @@ xmlhttp = new XMLHttpRequest();
            localStorage.borda_tamanho_caixa_texto = dados.textSizeBorder;
            localStorage.borda_tipo_caixa_texto = dados.textBorderType;
 
+           document.getElementById('n_visitas').innerHTML = Number(dados.visits)+1;
+
+           dados =  { email: localStorage.email, tipo: "visits"};
+            dados = encodeURIComponent(JSON.stringify(dados));
+
+             xmlhttp = new XMLHttpRequest(); 
+             xmlhttp.open("GET","http://localhost:3000/saveDadosUser/" + dados, true);
+             xmlhttp.onreadystatechange=function(){
+                   if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                     let respemail=xmlhttp.responseText;
+                   }
+             }
+             xmlhttp.send();
+
 
            if(localStorage.bg !== "" && localStorage.bg !== undefined)
             document.body.style.backgroundImage = localStorage.bg;
