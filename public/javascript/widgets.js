@@ -1,5 +1,5 @@
 xmlhttp = new XMLHttpRequest();
-   xmlhttp.open("GET","http://localhost:3000/dadosUser/" + localStorage.email, true);
+   xmlhttp.open("GET","https://waifuengineering.herokuapp.com/dadosUser/" + localStorage.email, true);
    xmlhttp.onreadystatechange=function(){
          if (xmlhttp.readyState==4 && xmlhttp.status==200){
            let dados=JSON.parse(xmlhttp.responseText);
@@ -28,7 +28,7 @@ xmlhttp = new XMLHttpRequest();
             dados = encodeURIComponent(JSON.stringify(dados));
 
              xmlhttp = new XMLHttpRequest(); 
-             xmlhttp.open("GET","http://localhost:3000/saveDadosUser/" + dados, true);
+             xmlhttp.open("GET","https://waifuengineering.herokuapp.com/saveDadosUser/" + dados, true);
              xmlhttp.onreadystatechange=function(){
                    if (xmlhttp.readyState==4 && xmlhttp.status==200){
                      let respemail=xmlhttp.responseText;
@@ -213,7 +213,7 @@ function carregaTexto()
   dados = encodeURIComponent(JSON.stringify(dados));
 
   xmlhttp = new XMLHttpRequest(); 
-   xmlhttp.open("GET","http://localhost:3000/saveDadosUser/" + dados, true);
+   xmlhttp.open("GET","https://waifuengineering.herokuapp.com/saveDadosUser/" + dados, true);
    xmlhttp.onreadystatechange=function(){
          if (xmlhttp.readyState==4 && xmlhttp.status==200){
            let respemail=xmlhttp.responseText;
@@ -251,7 +251,7 @@ viiny.dragger(obj, {
     dados = encodeURIComponent(JSON.stringify(dados));
 
   xmlhttp = new XMLHttpRequest(); 
-   xmlhttp.open("GET","http://localhost:3000/saveDadosUser/" + dados, true);
+   xmlhttp.open("GET","https://waifuengineering.herokuapp.com/saveDadosUser/" + dados, true);
    xmlhttp.onreadystatechange=function(){
          if (xmlhttp.readyState==4 && xmlhttp.status==200){
            let respemail=xmlhttp.responseText;
@@ -302,7 +302,7 @@ function salvaGaleria(e)
   dados = encodeURIComponent(JSON.stringify(dados));
 
        xmlhttp = new XMLHttpRequest(); 
-   xmlhttp.open("GET","http://localhost:3000/saveDadosUser/" + dados, true);
+   xmlhttp.open("GET","https://waifuengineering.herokuapp.com/saveDadosUser/" + dados, true);
    xmlhttp.onreadystatechange=function(){
          if (xmlhttp.readyState==4 && xmlhttp.status==200){
            let respemail=xmlhttp.responseText;
@@ -350,7 +350,7 @@ function alteraChao(e) {
     dados = encodeURIComponent(JSON.stringify(dados));
 
        xmlhttp = new XMLHttpRequest(); 
-   xmlhttp.open("GET","http://localhost:3000/saveDadosUser/" + dados, true);
+   xmlhttp.open("GET","https://waifuengineering.herokuapp.com/saveDadosUser/" + dados, true);
    xmlhttp.onreadystatechange=function(){
          if (xmlhttp.readyState==4 && xmlhttp.status==200){
            let respemail=xmlhttp.responseText;
@@ -382,7 +382,7 @@ function alteraCeu(e) {
     dados = encodeURIComponent(JSON.stringify(dados));
 
    xmlhttp = new XMLHttpRequest(); 
-   xmlhttp.open("GET","http://localhost:3000/saveDadosUser/" + dados, true);
+   xmlhttp.open("GET","https://waifuengineering.herokuapp.com/saveDadosUser/" + dados, true);
    xmlhttp.onreadystatechange=function(){
          if (xmlhttp.readyState==4 && xmlhttp.status==200){
            let respemail=xmlhttp.responseText;

@@ -131,3 +131,9 @@ body{
   background-color: white;
   margin: 5px; 
 }
+
+#logout{
+  position: fixed;
+  top: 0;
+  right: 0;
+}

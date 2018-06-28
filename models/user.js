@@ -216,6 +216,21 @@ UserSchema.statics.contents = function (email, callback) {
     });
 }
 
+UserSchema.statics.visitor = function (username, callback) {
+  console.log("entrou visitor");
+  User.findOne({ username: username })
+    .exec(function (err, user) {
+      if (err) {
+        return callback(err)
+      } else if (!user) {
+        var err = new Error('usuario nao encontrado.');
+        err.status = 404;
+        return callback(err);
+      }
+      return callback(null, user);
+    });
+}
+
 //Autenticação da entrada sobre o banco
 UserSchema.statics.authenticate = function (email, password, callback) {
   User.findOne({ email: email })

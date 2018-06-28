@@ -1,6 +1,4 @@
 node_modules/
 .idea/
-templateLogReg/
 package-lock.json
-yarn.lock
 .vscode/
