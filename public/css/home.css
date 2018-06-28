@@ -106,27 +106,27 @@ h2{
 }
 
 #stair-left{
-	width: 7%;
-	height: 80%;
+	width: 20%;
+	height: 97%;
 	position: absolute;
-	left: 21%;
-	bottom: 7%;
+	left: 16%;
+	bottom: 0;
 }
 
 #stair-middle{
-	width: 10%;
+	width: 50%;
 	height: 75%;
 	position: absolute;
-	left: 45%;
-	bottom: 7%;
+	left: 25%;
+	bottom: 4px;
 }
 
 #stair-right{
-	width: 7%;
-	height: 80%;
+	width: 20%;
+	height: 97%;
 	position: absolute;
-	right: 21%;
-	bottom: 7%;
+	right: 16%;
+	bottom: 0;
 }
 
 #cano1{
@@ -216,7 +216,7 @@ h2{
 
 
 #madoka{
-    height: 13%;
+    height: 100px;
     width: auto;
     bottom: 7%;
     position: absolute;
