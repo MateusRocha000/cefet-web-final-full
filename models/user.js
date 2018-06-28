@@ -30,9 +30,6 @@ var UserSchema = new mongoose.Schema({
   skyColor: {
     type: String
   },
-  images: {
-    type: String
-  },
   textActive: {
     type: String
   },
@@ -125,6 +122,62 @@ UserSchema.statics.saveWidgets = function(usr,callback){
        { $set:
           {
             background: usr.bg
+          }
+       }
+    ).exec(function (err, usr) {
+       return callback(usr);
+     });
+  }
+  else if (usr.tipo === "gallery")
+  {
+    console.log(usr.email);
+    User.update(
+       { email: usr.email },
+       { $set:
+          {
+            links: usr.links,
+            comments: usr.comments,
+            galleryActive: usr.galleryActive
+          }
+       }
+    ).exec(function (err, usr) {
+       return callback(usr);
+     });
+  }
+  else if (usr.tipo === "box")
+  {
+    console.log(usr.email);
+    User.update(
+       { email: usr.email },
+       { $set:
+          {
+            textActive: usr.textActive,
+            textHeight: usr.textHeight,
+            textFont: usr.textFont,
+            textWidth: usr.textWidth,
+            textTop: usr.textTop,
+            textLeft: usr.textLeft,
+            textBackground: usr.textBackground,
+            textColor: usr.textColor,
+            textBorderColor: usr.textBorderColor,
+            textSizeBorder: usr.textSizeBorder,
+            textBorderType: usr.textBorderType,
+            text: usr.text
+          }
+       }
+    ).exec(function (err, usr) {
+       return callback(usr);
+     });
+  }
+  else if (usr.tipo === "drag")
+  {
+    console.log(usr.email);
+    User.update(
+       { email: usr.email },
+       { $set:
+          {
+            textTop: usr.textTop,
+            textLeft: usr.textLeft
           }
        }
     ).exec(function (err, usr) {

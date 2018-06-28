@@ -113,20 +113,23 @@ xmlhttp = new XMLHttpRequest();
 
             if(localStorage.fundo_caixa_texto !== "" && localStorage.fundo_caixa_texto !== undefined)
             {
-              obj.style.backgroundColor = localStorage.fundo_caixa_texto;
+              obj.style.backgroundColor = "#" + localStorage.fundo_caixa_texto;
               document.getElementById('fundo_caixa_texto').value  = localStorage.fundo_caixa_texto;
+              document.getElementById('fundo_caixa_texto').style.backgroundColor = "#" + localStorage.fundo_caixa_texto;
             }
 
             if(localStorage.cor_caixa_texto !== "" && localStorage.cor_caixa_texto !== undefined)
             {
-              obj.style.color = localStorage.cor_caixa_texto;
-              document.getElementById('cor_caixa_texto').value  = localStorage.cor_caixa_texto;
+              obj.style.color = "#" + localStorage.cor_caixa_texto;
+              document.getElementById('cor_caixa_texto').value = localStorage.cor_caixa_texto;
+              document.getElementById('cor_caixa_texto').style.backgroundColor = "#" + localStorage.cor_caixa_texto;
             }
 
             if(localStorage.cor_borda_caixa_texto !== "" && localStorage.cor_borda_caixa_texto !== undefined)
             {
-              obj.style.borderColor = localStorage.cor_borda_caixa_texto;
+              obj.style.borderColor = "#" + localStorage.cor_borda_caixa_texto;
               document.getElementById('cor_borda_caixa_texto').value  = localStorage.cor_borda_caixa_texto;
+              document.getElementById('cor_borda_caixa_texto').style.backgroundColor = "#" + localStorage.cor_borda_caixa_texto;
             }
 
             if(localStorage.borda_tamanho_caixa_texto !== "" && localStorage.borda_tamanho_caixa_texto !== undefined)
@@ -146,7 +149,9 @@ xmlhttp = new XMLHttpRequest();
    xmlhttp.send();
 
 
-
+function rgbToHex(r, g, b) {
+    return  ((1 << 24) + (Number(r) << 16) + (Number(g) << 8) + Number(b)).toString(16).slice(1).toUpperCase();
+}
 
 
 var obj = document.getElementById('div_widget_texto');
@@ -170,18 +175,76 @@ function carregaTexto()
   localStorage.texto_caixa_texto = obj.innerHTML;
   localStorage.left_caixa_texto = obj.style.left;
   localStorage.top_caixa_texto = obj.style.top;
-  localStorage.fundo_caixa_texto = obj.style.backgroundColor;
-  localStorage.cor_caixa_texto = obj.style.color;
-  localStorage.cor_borda_caixa_texto = obj.style.borderColor;
+  // let teste = obj.style.backgroundColor.split(',')[0].split('(')[1];
+  localStorage.fundo_caixa_texto = rgbToHex(obj.style.backgroundColor.split(',')[0].split('(')[1],obj.style.backgroundColor.split(',')[1],obj.style.backgroundColor.split(',')[2].split(')')[0]);// + componentToHex(g) + componentToHex(b);
+  localStorage.cor_caixa_texto = rgbToHex(obj.style.color.split(',')[0].split('(')[1],obj.style.color.split(',')[1],obj.style.color.split(',')[2].split(')')[0]);
+  localStorage.cor_borda_caixa_texto = rgbToHex(obj.style.borderColor.split(',')[0].split('(')[1],obj.style.borderColor.split(',')[1],obj.style.borderColor.split(',')[2].split(')')[0]);
   localStorage.borda_tipo_caixa_texto = obj.style.borderStyle;
   localStorage.ativo_caixa_texto = document.getElementById('ativo_caixa_texto').checked;
-  document.getElementById('widget-texto').style.display='none'
+
+  let dados =  { 
+    email: localStorage.email,
+    tipo: "box",
+    textActive: localStorage.ativo_caixa_texto,
+    textHeight: localStorage.altura_caixa_texto,
+    textFont: localStorage.fonte_caixa_texto,
+    textWidth: localStorage.largura_caixa_texto,
+    textBackground: localStorage.fundo_caixa_texto,
+    textColor: localStorage.cor_caixa_texto,
+    textBorderColor: localStorage.cor_borda_caixa_texto,
+    textSizeBorder: localStorage.borda_tamanho_caixa_texto,
+    textBorderType: localStorage.borda_tipo_caixa_texto,
+    text: localStorage.texto_caixa_texto}
+
+  dados = encodeURIComponent(JSON.stringify(dados));
+
+  xmlhttp = new XMLHttpRequest(); 
+   xmlhttp.open("GET","http://localhost:3000/saveDadosUser/" + dados, true);
+   xmlhttp.onreadystatechange=function(){
+         if (xmlhttp.readyState==4 && xmlhttp.status==200){
+           let respemail=xmlhttp.responseText;
+         }
+   }
+   xmlhttp.send();
+
+
+  if(localStorage.ativo_caixa_texto === "false")
+  {
+    obj.style.display = "none";
+    document.getElementById('ativo_caixa_texto').checked = false;
+  }
+  else if(localStorage.ativo_caixa_texto === "true")
+  {
+    obj.style.display = "block";
+    document.getElementById('ativo_caixa_texto').checked = true;
+  }
+
+  document.getElementById('widget-texto').style.display='none';
+
 }
     
 viiny.dragger(obj, {
   onStop: function (e, obj) {
     localStorage.left_caixa_texto = obj.style.left;
     localStorage.top_caixa_texto = obj.style.top;
+
+    let dados = {
+    email: localStorage.email,
+    tipo: "drag",
+    textTop: localStorage.top_caixa_texto,
+    textLeft: localStorage.left_caixa_texto}
+
+    dados = encodeURIComponent(JSON.stringify(dados));
+
+  xmlhttp = new XMLHttpRequest(); 
+   xmlhttp.open("GET","http://localhost:3000/saveDadosUser/" + dados, true);
+   xmlhttp.onreadystatechange=function(){
+         if (xmlhttp.readyState==4 && xmlhttp.status==200){
+           let respemail=xmlhttp.responseText;
+         }
+   }
+   xmlhttp.send();
+
   }
 });
 
@@ -221,6 +284,28 @@ function salvaGaleria(e)
   links.pop();
   comentarios.pop();
 
+  let dados =  { email: localStorage.email, tipo: "gallery", links: localStorage.links, comments: localStorage.comentarios, galleryActive: localStorage.ativo_galeria};
+  dados = encodeURIComponent(JSON.stringify(dados));
+
+       xmlhttp = new XMLHttpRequest(); 
+   xmlhttp.open("GET","http://localhost:3000/saveDadosUser/" + dados, true);
+   xmlhttp.onreadystatechange=function(){
+         if (xmlhttp.readyState==4 && xmlhttp.status==200){
+           let respemail=xmlhttp.responseText;
+         }
+   }
+   xmlhttp.send();
+
+   if(localStorage.ativo_galeria === "false")
+    {
+      document.getElementById('ativo_galeria').checked = false;
+      document.getElementById('galeria').style.display = "none";
+    }
+    else if(localStorage.ativo_galeria === "true")
+    {
+      document.getElementById('galeria').style.display = "block";
+      document.getElementById('ativo_galeria').checked = true;
+    }
   document.getElementById('slide').src = links[0];
   document.getElementById('cmt_galeria').innerHTML = comentarios[0];
   document.getElementById('widget-galeria').style.display='none'
@@ -247,7 +332,7 @@ function alteraChao(e) {
     }
     localStorage.bg = document.body.style.backgroundImage;
 
-    dados =  { email: localStorage.email, tipo: "floor", bg: localStorage.bg};
+    let dados =  { email: localStorage.email, tipo: "floor", bg: localStorage.bg};
     dados = encodeURIComponent(JSON.stringify(dados));
 
        xmlhttp = new XMLHttpRequest(); 
